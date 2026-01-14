@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
+
+
 <body>
 
 <header class="navbar">
@@ -18,14 +20,13 @@
     </span>
   </div>
 
-  <nav>
+<nav>
   <a href="index.html" class="active">Beranda</a>
   <a href="tentang_kami.html">Tentang Kami</a>
 
   <div class="dropdown">
     <a href="#" class="dropdown-toggle">
       Destinasi Wisata <i class="fa-solid fa-chevron-down"></i>
-      <a href="loginpage.html">Login</a>
     </a>
 
     <div class="dropdown-menu">
@@ -38,7 +39,12 @@
       <a href="#">Destinasi Wisata Industri</a>
     </div>
   </div>
+
+  <!-- LOGIN & LOGOUT -->
+  <a href="loginpage.html" id="btnLogin">Login</a>
+  <a href="#" id="btnLogout" style="display:none;">Logout</a>
 </nav>
+
 
 
   <div class="search">
@@ -223,4 +229,22 @@
 </footer>
 
 </body>
+<script>
+const btnLogin = document.getElementById('btnLogin');
+const btnLogout = document.getElementById('btnLogout');
+
+const isLogin = localStorage.getItem('isLogin');
+
+if (isLogin === 'true') {
+    btnLogin.style.display = 'none';
+    btnLogout.style.display = 'inline-block';
+}
+
+btnLogout.addEventListener('click', () => {
+    localStorage.clear();
+    window.location.href = 'loginpage.html';
+});
+</script>
+
+
 </html>

@@ -701,7 +701,7 @@
                 
                 // Redirect ke dashboard setelah 1.5 detik
                 setTimeout(() => {
-                    window.location.href = 'Page_awal.html'; // Redirect ke dashboard
+                    window.location.href = 'index.html'; // Redirect ke dashboard
                 }, 1500);
                 
             }, 1500);
@@ -926,18 +926,64 @@
                 e.target.classList.remove('shake');
             }
         });
-    </script>
-    <script>
-  document.getElementById('guestButton').addEventListener('click', function () {
-    // simpan status guest (opsional)
-    localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem('isGuest', 'true');
-    localStorage.setItem('username', 'Guest');
 
-    // langsung redirect
-    window.location.href = 'Page_awal.html';
-  });
+/* ================= LOGIN USER ================= */
+document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+
+    if (!username || !password) {
+        showNotification('Email & password wajib diisi', '#ff4757');
+        return;
+    }
+
+    // SIMULASI LOGIN BERHASIL
+    localStorage.setItem('isLogin', 'true');
+    localStorage.setItem('username', username);
+    localStorage.removeItem('isGuest');
+
+    showNotification(`Login berhasil! Selamat datang ${username}`, '#9370db');
+
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 1200);
+});
+
+
+/* ================= LOGIN GUEST ================= */
+document.getElementById('guestButton').addEventListener('click', function () {
+    if (!confirm('Masuk sebagai tamu? Beberapa fitur akan dibatasi')) return;
+
+    localStorage.setItem('isLogin', 'true');
+    localStorage.setItem('username', 'Guest');
+    localStorage.setItem('isGuest', 'true');
+
+    showNotification('Masuk sebagai Guest', '#9370db');
+
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 1200);
+});
+
+
+/* ================= NOTIFIKASI ================= */
+function showNotification(message, color) {
+    const box = document.getElementById('successMessage');
+    const text = document.getElementById('successText');
+
+    text.textContent = message;
+    box.style.background = color;
+    box.classList.add('show');
+
+    setTimeout(() => {
+        box.classList.remove('show');
+    }, 3000);
+}
 </script>
+
+
 
 </body>
 </html>
