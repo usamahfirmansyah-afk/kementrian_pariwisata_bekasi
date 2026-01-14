@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Wisata</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="booking-body">
+
+<!-- HEADER -->
+<header class="booking-header">
+  <a href="javascript:history.back()" class="back-btn">
+    <i class="fa-solid fa-arrow-left"></i> Kembali
+  </a>
+
+  <img src="https://bangbadil.bekasikab.go.id/bangbadil/assets/img/logo_bekasi.png"
+       class="booking-logo">
+</header>
+
+<!-- CARD -->
+<section class="booking-section">
+  <div class="booking-scroll">
+  <div class="booking-card">
+
+
+  <h2>Informasi Pembooking Wisata</h2>
+
+  <form class="booking-form">
+
+    <div class="form-grid">
+      <div>
+        <label>Nama Pembooking</label>
+        <input type="text" placeholder="Masukkan nama lengkap">
+      </div>
+
+      <div>
+        <label>Nama Universitas / Sekolah / Organisasi</label>
+        <input type="text" placeholder="Nama instansi">
+      </div>
+
+      <div>
+        <label>Email</label>
+        <input type="email" placeholder="example@gmail.com">
+      </div>
+
+      <div>
+        <label>Telpon</label>
+        <input type="text" placeholder="08xxxxxxxxxx">
+      </div>
+
+      <div>
+        <label>Domisili</label>
+        <input type="text" placeholder="Kota / Kabupaten">
+      </div>
+
+      <div>
+        <label>Tujuan Kegiatan</label>
+        <select>
+          <option>Pilih Opsi</option>
+          <option>Wisata Edukasi</option>
+          <option>Penelitian</option>
+          <option>Kunjungan Sekolah</option>
+          <option>Wisata Umum</option>
+        </select>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- BOOKING INFO -->
+    <h3>Booking</h3>
+
+    <div class="booking-info">
+      <img src="static/img/museum1.jpg">
+
+      <div class="booking-detail">
+        <h4>Gedung Juang 45</h4>
+       <p>
+  <i class="fa-regular fa-calendar"></i>
+  <input type="text" placeholder="Contoh: 12 Januari 2026" class="inline-input">
+</p>
+
+<p>
+  <i class="fa-regular fa-clock"></i>
+  <input type="text" placeholder="Contoh: 09.00 – 12.00" class="inline-input">
+</p>
+        <div class="counter">
+          <span>Jumlah Pengunjung</span>
+          <div class="counter-box">
+            <button type="button">-</button>
+            <input type="text" value="1">
+            <button type="button">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-price">
+        <b>Gratis Biaya Pembookingkan</b>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="agree">
+      <input type="checkbox">
+      <label>Saya setuju dengan syarat dan ketentuan wisata</label>
+    </div>
+
+    <button class="btn-submit">
+      Booking Sekarang
+    </button>
+
+  </form>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="booking-footer">
+  <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+  <a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
+  <a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
+  <a href="#"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+</footer>
+
+</body>
+</html>

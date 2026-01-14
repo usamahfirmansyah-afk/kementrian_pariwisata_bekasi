@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Sejarah - Dinas Pariwisata Kabupaten Bekasi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <img src="https://bangbadil.bekasikab.go.id/bangbadil/assets/img/logo_bekasi.png" alt="Logo Bekasi">
+    <span>
+      Dinas Pariwisata<br>
+      <b>Kabupaten Bekasi</b>
+    </span>
+  </div>
+
+  <nav>
+    <a href="Page_awal.html">Beranda</a>
+    <a href="tentang_kami.html" class="active">Tentang Kami</a>
+ <div class="dropdown">
+  <a href="#" class="dropdown-btn">
+    Destinasi Wisata <span class="caret">˅</span>
+  </a>
+
+  <div class="dropdown-menu">
+    <a href="wisata_kuliner.html">Destinasi Wisata Kuliner</a>
+    <a href="wisata_museum.html">Destinasi Wisata Museum</a>
+    <a href="#">Destinasi Wisata Desa</a>
+    <a href="#">Destinasi Wisata Rekreasi Air</a>
+    <a href="#">Destinasi Wisata Alam</a>
+    <a href="#">Destinasi Wisata Taman</a>
+    <a href="#">Destinasi Wisata Industri</a>
+  </div>
+</div>
+
+  </nav>
+
+  <div class="search">
+    <input type="text" placeholder="Search Destinasi...">
+  </div>
+</header>
+
+<!-- HEADER BIRU -->
+<section class="tentang-header">
+  <h1>Sejarah</h1>
+  <p>Sejarah Mengenai Dinas Pariwisata Kabupaten Bekasi</p>
+</section>
+
+<!-- KONTEN -->
+<section class="tentang-content">
+  <div class="tentang-box">
+
+    <div class="tentang-images">
+      <img src="static/img/red-planet-bekasi.jpg" alt="">
+      <img src="static/img/tourism.jpg" alt="">
+    </div>
+
+    <div class="tentang-text">
+      <p>
+        Kabupaten Bekasi secara administratif dikepalai oleh seorang Bupati.
+        Wilayah ini terbagi dalam 23 kecamatan yang berbatasan dengan Laut Jawa
+        di bagian utara, Kabupaten Bogor di bagian selatan, Jakarta Utara dan
+        Kota Bekasi di bagian barat serta Kabupaten Karawang di bagian timur.
+      </p>
+
+      <p>
+        Menurut Poerbatjaraka, kata “Bekasi” berasal dari kata Chandrabhaga,
+        sebuah sungai yang disebut dalam Prasasti Tugu. Dalam perkembangan
+        bahasa, Chandrabhaga berubah menjadi Bhagasasi hingga akhirnya menjadi
+        Bekasi.
+      </p>
+
+      <p>
+        Berdasarkan Peraturan Daerah Kota Bekasi Nomor 07 Tahun 2016, terbentuk
+        Dinas Pariwisata dan Kebudayaan yang bertugas mengelola serta
+        mengembangkan potensi wisata Kabupaten Bekasi agar dikenal luas oleh
+        masyarakat.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- VISI & MISI -->
+<section class="visi-misi-section">
+  <div class="visi-misi-header">
+    <h1>Visi & Misi</h1>
+    <p>Visi Misi Dinas Pariwisata Kabupaten Bekasi</p>
+  </div>
+
+  <div class="visi-misi-box">
+    <h2>Visi</h2>
+    <p class="visi-text">
+      Terwujudnya Pariwisata Yang Kreatif dan Ramah Lingkungan
+    </p>
+
+    <h2>Misi</h2>
+    <ul class="misi-list">
+      <li>Meningkatkan destinasi wisata</li>
+      <li>Pengembangan kualitas SDM dan pengembangan pariwisata</li>
+      <li>Meningkatkan sarana dan prasarana pariwisata</li>
+      <li>Meningkatkan promosi pariwisata</li>
+      <li>Meningkatkan sistem informasi</li>
+      <li>Meningkatkan kerjasama kemitraan industri pariwisata</li>
+      <li>Meningkatkan kelembagaan pariwisata</li>
+    </ul>
+
+    <div class="visi-misi-images">
+      <img src="static/img/foto1.jpg" alt="">
+      <img src="static/img/foto2.jpg" alt="">
+      <img src="static/img/foto3.jpg" class="zoomable-img" alt="Foto Sejarah">
+
+    </div>
+  </div>
+</section>
+
+<!-- STRUKTUR ORGANISASI -->
+<section class="struktur-section">
+  <div class="struktur-header">
+    <h1>Struktur Organisasi</h1>
+    <p>Struktur Organisasi Dinas Pariwisata Kabupaten Bekasi</p>
+  </div>
+
+  <div class="struktur-box">
+    <!-- FOTO STRUKTUR (NANTI GANTI GAMBAR SESUAI PUNYA KAMU) -->
+    <img src="static/img/struktur-organisasi.jpg" alt="Struktur Organisasi">
+  </div>
+</section>
+
+
+<footer class="footer-sosmed">
+  <div class="sosmed-container">
+    <a href="#" class="sosmed-item">Instagram</a>
+    <a href="#" class="sosmed-item">Facebook</a>
+    <a href="#" class="sosmed-item">YouTube</a>
+    <a href="#" class="sosmed-item">TikTok</a>
+  </div>
+</footer>
+
+<!-- Modal Image -->
+<div id="imageModal" class="image-modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImg">
+</div>
+
+<script>
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImg");
+
+  document.querySelectorAll(".zoomable-img").forEach(img => {
+    img.onclick = function () {
+      modal.style.display = "block";
+      modalImg.src = this.src;
+    }
+  });
+
+  document.querySelector(".close").onclick = function () {
+    modal.style.display = "none";
+  };
+
+  modal.onclick = function () {
+    modal.style.display = "none";
+  };
+</script>
+
+</body>
+</html>

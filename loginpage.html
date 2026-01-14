@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobat Wisata - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f9ff 0%, #e6eeff 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 150, 0.15);
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: containerAppear 0.8s forwards 0.2s;
+            position: relative;
+        }
+        
+        @keyframes containerAppear {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .welcome-section {
+            flex: 1;
+            background-image: linear-gradient(rgba(106, 90, 205, 0.6), rgba(147, 112, 219, 0.5)), url('https://img.olenka.id/articles/archive-20240917/bekasi-100103.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            z-index: 0;
+        }
+        
+        .welcome-section > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            transform: translateX(-20px);
+            opacity: 0;
+            animation: slideInLeft 0.6s forwards 0.5s;
+        }
+        
+        @keyframes slideInLeft {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .logo-icon {
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .logo:hover .logo-icon {
+            transform: scale(1.05) rotate(5deg);
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo-icon img {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        
+        .welcome-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideInUp 0.6s forwards 0.7s;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .welcome-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideInUp 0.6s forwards 0.9s;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes slideInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            bottom: 15%;
+            right: 10%;
+            animation-delay: -5s;
+            animation-duration: 20s;
+        }
+        
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 50%;
+            left: 5%;
+            animation-delay: -10s;
+            animation-duration: 18s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-30px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(20px) rotate(240deg);
+            }
+        }
+        
+        .login-section {
+            flex: 1;
+            padding: 60px 50px;
+            position: relative;
+        }
+        
+        .login-header {
+            margin-bottom: 40px;
+            transform: translateX(20px);
+            opacity: 0;
+            animation: slideInRight 0.6s forwards 0.5s;
+        }
+        
+        @keyframes slideInRight {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .login-header h2 {
+            font-size: 1.8rem;
+            color: #6a5acd; /* Warna ungu yang lebih soft */
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            transform: translateY(10px);
+            opacity: 0;
+        }
+        
+        .form-group:nth-child(1) {
+            animation: formAppear 0.5s forwards 0.8s;
+        }
+        
+        .form-group:nth-child(2) {
+            animation: formAppear 0.5s forwards 1s;
+        }
+        
+        @keyframes formAppear {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            transition: all 0.3s;
+        }
+        
+        .input-with-icon input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e1e5f1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: #fafcff;
+        }
+        
+        .input-with-icon input:focus {
+            border-color: #9370db; /* Warna ungu yang lebih soft */
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(147, 112, 219, 0.1);
+            background-color: white;
+            transform: translateY(-2px);
+        }
+        
+        .input-with-icon input:focus + i {
+            color: #9370db; /* Warna ungu yang lebih soft */
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .input-with-icon input:valid {
+            border-color: #d8c3ff;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 30px;
+            transform: translateY(10px);
+            opacity: 0;
+            animation: formAppear 0.5s forwards 1.2s;
+        }
+        
+        .forgot-password a {
+            color: #9370db; /* Warna ungu yang lebih soft */
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .forgot-password a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #9370db; /* Warna ungu yang lebih soft */
+            transition: width 0.3s ease;
+        }
+        
+        .forgot-password a:hover::after {
+            width: 100%;
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #87ceeb 0%, #4682b4 100%); /* Gradien ungu */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(10px);
+            opacity: 0;
+            animation: formAppear 0.5s forwards 1.4s;
+        }
+        
+        .login-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .login-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .login-button:active {
+            transform: translateY(0);
+        }
+        
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideInUp 0.6s forwards 1.6s;
+        }
+        
+        .option-button {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e1e5f1;
+            border-radius: 10px;
+            background-color: white;
+            font-weight: 600;
+            color: #444;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .option-button:hover::before {
+            left: 100%;
+        }
+        
+        .option-button:hover {
+            border-color: #9370db; /* Warna ungu yang lebih soft */
+            color: #9370db; /* Warna ungu yang lebih soft */
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .register-button {
+            color: white;
+            background: linear-gradient(135deg, #6a5acd 0%, #5a4ac5 100%); /* Gradien ungu */
+            border-color: #6a5acd;
+        }
+        
+        .register-button:hover {
+            background: linear-gradient(135deg, #5a4ac5 0%, #4a3ab5 100%);
+            color: white;
+            border-color: #5a4ac5;
+        }
+        
+        .guest-button i, .register-button i {
+            margin-right: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .option-button:hover i {
+            transform: scale(1.1);
+        }
+        
+        .footer-text {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 0.9rem;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideInUp 0.6s forwards 1.8s;
+        }
+        
+        /* Animasi sukses login */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #9370db 0%, #6a5acd 100%); /* Gradien ungu */
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            transform: translateX(150%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        
+        .success-message.show {
+            transform: translateX(0);
+        }
+        
+        .success-message i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Animasi untuk input error */
+        .shake {
+            animation: shake 0.5s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .input-error {
+            border-color: #ff4757 !important;
+            background-color: #fff5f5 !important;
+        }
+        
+        .input-error + i {
+            color: #ff4757 !important;
+        }
+        
+        /* Efek untuk menunjukkan gambar latar lebih jelas */
+        .image-preview {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 2;
+        }
+        
+        .image-preview:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .image-preview i {
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 850px) {
+            .container {
+                flex-direction: column;
+                max-width: 500px;
+            }
+            
+            .welcome-section {
+                padding: 40px 30px;
+            }
+            
+            .login-section {
+                padding: 40px 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .welcome-section h1 {
+                font-size: 2rem;
+            }
+            
+            .options {
+                flex-direction: column;
+            }
+            
+            .option-button {
+                width: 100%;
+            }
+            
+            .image-preview {
+                bottom: 10px;
+                right: 10px;
+                font-size: 0.7rem;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-section">
+            <div class="floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
+            
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="https://bangbadil.bekasikab.go.id/bangbadil/assets/img/logo_bekasi.png" alt="logo_bekasi">
+                </div>
+                <span>Sobat Wisata</span>
+            </div>
+            <h1>Hallo Sobat Wisata!</h1>
+            <p>Kami sangat gembira bertemu Anda Kembali! Masuk ke akun Anda untuk melanjutkan perjalanan wisata Anda.</p>
+            
+            <div class="image-preview" id="toggleGradient">
+                <i class="fas fa-eye"></i>
+                <span>Lihat gambar latar</span>
+            </div>
+        </div>
+        
+        <div class="login-section">
+            <div class="login-header">
+                <h2>Email atau nomor telepon</h2>
+                <p>Masukkan informasi login Anda untuk mengakses akun</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Email atau Nomor Telepon</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="Masukkan email atau nomor telepon" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Kata Sandi</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Masukkan kata sandi" required>
+                    </div>
+                </div>
+                
+                <div class="forgot-password">
+                    <a href="#" id="forgotPassword">Lupa Kata Sandi Anda?</a>
+                </div>
+                
+                <button type="submit" class="login-button">
+                    <span class="button-text">Masuk</span>
+                </button>
+            </form>
+            
+            <div class="options">
+                <button class="option-button register-button" id="registerButton">
+                    <i class="fas fa-user-plus"></i> Buat akun Daftar
+                </button>
+                <button class="option-button guest-button" id="guestButton">
+                    <i class="fas fa-user"></i> Masuk sebagai Tamu
+                </button>
+            </div>
+            
+            <div class="footer-text">
+                &copy; 2023 Sobat Wisata. Semua hak dilindungi.
+            </div>
+        </div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i>
+        <span id="successText">Login berhasil!</span>
+    </div>
+
+    <script>
+        // Form submission handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            
+            // Reset error state
+            usernameInput.classList.remove('input-error', 'shake');
+            passwordInput.classList.remove('input-error', 'shake');
+            
+            // Validasi lebih lengkap
+            let isValid = true;
+            let errorMessage = '';
+            
+            if (!username) {
+                usernameInput.classList.add('input-error', 'shake');
+                errorMessage = 'Email atau nomor telepon harus diisi';
+                isValid = false;
+            } else if (!isValidEmailOrPhone(username)) {
+                usernameInput.classList.add('input-error', 'shake');
+                errorMessage = 'Format email atau nomor telepon tidak valid';
+                isValid = false;
+            }
+            
+            if (!password) {
+                passwordInput.classList.add('input-error', 'shake');
+                if (!errorMessage) errorMessage = 'Kata sandi harus diisi';
+                isValid = false;
+            } else if (password.length < 6) {
+                passwordInput.classList.add('input-error', 'shake');
+                if (!errorMessage) errorMessage = 'Kata sandi minimal 6 karakter';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                showNotification(errorMessage || 'Harap periksa data yang dimasukkan', '#ff4757');
+                return;
+            }
+            
+            // Simulasi loading pada tombol login
+            const loginButton = document.querySelector('.login-button');
+            const buttonText = loginButton.querySelector('.button-text');
+            const originalText = buttonText.textContent;
+            
+            loginButton.disabled = true;
+            buttonText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+            
+            // Simulasi permintaan server dengan timeout
+            setTimeout(() => {
+                // Simpan data login di localStorage
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', username);
+                localStorage.setItem('loginTime', new Date().toISOString());
+                
+                // Tampilkan pesan sukses
+                showNotification(`Login berhasil! Selamat datang, ${getDisplayName(username)}`, '#9370db');
+                
+                // Reset tombol login
+                loginButton.disabled = false;
+                buttonText.textContent = originalText;
+                
+                // Redirect ke dashboard setelah 1.5 detik
+                setTimeout(() => {
+                    window.location.href = 'Page_awal.html'; // Redirect ke dashboard
+                }, 1500);
+                
+            }, 1500);
+        });
+        
+        // Fungsi validasi email atau nomor telepon
+        function isValidEmailOrPhone(input) {
+            // Validasi email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            // Validasi nomor telepon (minimal 10 digit, hanya angka)
+            const phoneRegex = /^[0-9]{10,15}$/;
+            
+            return emailRegex.test(input) || phoneRegex.test(input);
+        }
+        
+        // Fungsi untuk mendapatkan nama display
+        function getDisplayName(input) {
+            if (input.includes('@')) {
+                // Jika email, ambil bagian sebelum @
+                return input.split('@')[0];
+            }
+            return input;
+        }
+        
+        // TAMBAHKAN fungsi untuk Guest login yang juga redirect
+        document.getElementById('guestButton').addEventListener('click', function() {
+            // Efek animasi pada tombol
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 200);
+            
+            showConfirmationModal();
+        });
+        
+        // Modifikasi fungsi showConfirmationModal untuk handle guest login
+        function showConfirmationModal() {
+            // Tampilkan modal konfirmasi dengan animasi
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '1000';
+            modal.style.opacity = '0';
+            modal.style.transition = 'opacity 0.3s';
+            
+            modal.innerHTML = `
+                <div style="background-color: white; padding: 30px; border-radius: 15px; max-width: 400px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(20px); transition: transform 0.3s;">
+                    <h3 style="margin-bottom: 15px; color: #6a5acd;">Masuk sebagai Tamu</h3>
+                    <p style="margin-bottom: 25px; color: #666;">Masuk sebagai tamu akan membatasi beberapa fitur. Apakah Anda yakin?</p>
+                    <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                        <button id="cancelGuest" style="padding: 10px 20px; border: 2px solid #e1e5f1; background-color: white; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Batal</button>
+                        <button id="confirmGuest" style="padding: 10px 20px; background: linear-gradient(135deg, #9370db 0%, #6a5acd 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Ya, Lanjutkan</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Animasi masuk modal
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                modal.querySelector('div').style.transform = 'translateY(0)';
+            }, 10);
+            
+            // Event listener untuk tombol batal
+            modal.querySelector('#cancelGuest').addEventListener('click', function() {
+                modal.style.opacity = '0';
+                modal.querySelector('div').style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    document.body.removeChild(modal);
+                }, 300);
+            });
+            
+            // Event listener untuk tombol konfirmasi - TAMBAHKAN REDIRECT
+            modal.querySelector('#confirmGuest').addEventListener('click', function() {
+                // Simpan status guest
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', 'Guest');
+                localStorage.setItem('isGuest', 'true');
+                
+                modal.style.opacity = '0';
+                modal.querySelector('div').style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    document.body.removeChild(modal);
+                    showNotification('Anda telah masuk sebagai tamu. Selamat menjelajah!', '#9370db');
+                    
+                    // Redirect setelah 1.5 detik
+                    setTimeout(() => {
+                        window.location.href = 'Page_awal.html';
+                    }, 1500);
+                }, 300);
+            });
+        }
+        
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification(message, color) {
+            const successMessage = document.getElementById('successMessage');
+            const successText = document.getElementById('successText');
+            successText.textContent = message;
+            successMessage.style.background = `linear-gradient(135deg, ${color} 0%, ${darkenColor(color, 20)} 100%)`;
+            
+            successMessage.classList.add('show');
+            
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Fungsi untuk menggelapkan warna
+        function darkenColor(color, percent) {
+            // Jika format hex
+            if (color.startsWith('#')) {
+                let num = parseInt(color.slice(1), 16);
+                let amt = Math.round(2.55 * percent);
+                let R = (num >> 16) - amt;
+                let G = (num >> 8 & 0x00FF) - amt;
+                let B = (num & 0x0000FF) - amt;
+                
+                return "#" + (
+                    0x1000000 +
+                    (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+                    (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+                    (B < 255 ? (B < 1 ? 0 : B) : 255)
+                ).toString(16).slice(1);
+            }
+            
+            // Jika format rgb/rgba
+            if (color.startsWith('rgb')) {
+                return color; // Untuk simplisitas, kembalikan warna asli
+            }
+            
+            return color;
+        }
+        
+        // Forgot password handler
+        document.getElementById('forgotPassword').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Efek animasi pada link
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 200);
+            
+            const email = prompt('Masukkan email Anda untuk mereset kata sandi:');
+            if (email) {
+                showNotification(`Permintaan reset telah dikirim ke ${email}. Silakan periksa email Anda.`, '#9370db');
+            }
+        });
+        
+       
+          document.getElementById('registerButton').addEventListener('click', function () {
+            // animasi klik
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+          this.style.transform = 'scale(1)';
+           }, 200);
+
+      // redirect ke halaman daftar
+       window.location.href = 'register.html';
+      }); 
+
+        // Toggle gradien untuk melihat gambar latar
+        document.getElementById('toggleGradient').addEventListener('click', function() {
+            const welcomeSection = document.querySelector('.welcome-section');
+            const currentBg = welcomeSection.style.backgroundImage || getComputedStyle(welcomeSection).backgroundImage;
+            const imagePreviewText = this.querySelector('span');
+            const imagePreviewIcon = this.querySelector('i');
+            
+            if (currentBg.includes('rgba(106, 90, 205, 0.6)')) {
+                // Ubah ke gradien yang lebih transparan
+                welcomeSection.style.backgroundImage = 'linear-gradient(rgba(106, 90, 205, 0.3), rgba(147, 112, 219, 0.2)), url("https://img.olenka.id/articles/archive-20240917/bekasi-100103.jpg")';
+                imagePreviewText.textContent = 'Lihat dengan gradien';
+                imagePreviewIcon.className = 'fas fa-eye-slash';
+                
+                // Tampilkan notifikasi
+                showNotification('Gradien diperjelas untuk menampilkan gambar latar', '#9370db');
+            } else {
+                // Kembali ke gradien normal
+                welcomeSection.style.backgroundImage = 'linear-gradient(rgba(106, 90, 205, 0.6), rgba(147, 112, 219, 0.5)), url("https://img.olenka.id/articles/archive-20240917/bekasi-100103.jpg")';
+                imagePreviewText.textContent = 'Lihat gambar latar';
+                imagePreviewIcon.className = 'fas fa-eye';
+                
+                // Tampilkan notifikasi
+                showNotification('Gradien dikembalikan ke tampilan normal', '#9370db');
+            }
+        });
+        
+        // Animasi untuk input focus
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.querySelector('i').style.color = '#9370db';
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.querySelector('i').style.color = '#777';
+                }
+            });
+            
+            // Efek saat input diisi
+            input.addEventListener('input', function() {
+                if (this.value) {
+                    this.parentElement.querySelector('i').style.color = '#9370db';
+                } else {
+                    this.parentElement.querySelector('i').style.color = '#777';
+                }
+            });
+        });
+        
+        // Hapus animasi shake setelah selesai
+        document.addEventListener('animationend', function(e) {
+            if (e.animationName === 'shake') {
+                e.target.classList.remove('shake');
+            }
+        });
+    </script>
+    <script>
+  document.getElementById('guestButton').addEventListener('click', function () {
+    // simpan status guest (opsional)
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('isGuest', 'true');
+    localStorage.setItem('username', 'Guest');
+
+    // langsung redirect
+    window.location.href = 'Page_awal.html';
+  });
+</script>
+
+</body>
+</html>

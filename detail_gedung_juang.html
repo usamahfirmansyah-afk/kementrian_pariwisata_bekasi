@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Gedung Juang 45 Tambun</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <img src="https://bangbadil.bekasikab.go.id/bangbadil/assets/img/logo_bekasi.png">
+    <span>Dinas Pariwisata<br><b>Kabupaten Bekasi</b></span>
+  </div>
+
+  <nav>
+    <a href="Page_awal.html">Beranda</a>
+    <a href="tentang_kami.html">Tentang Kami</a>
+    <div class="dropdown">
+      <a href="#" class="dropdown-toggle active">
+        Destinasi Wisata <i class="fa-solid fa-chevron-down"></i>
+      </a>
+      <div class="dropdown-menu">
+        <a href="wisata_museum.html" class="active">
+          Destinasi Wisata Museum
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="search">
+    <input type="text" placeholder="Search Destinasi...">
+  </div>
+</header>
+
+<!-- HERO DETAIL -->
+<section class="detail-hero" style="background-image: url('static/img/museum1.jpg');">
+  <div class="detail-overlay">
+
+    <span class="badge-promo">🏛️ Wisata Sejarah</span>
+
+    <h1>Gedung Juang 45 Tambun</h1>
+    <p>
+      Gedung bersejarah peninggalan masa perjuangan
+      kemerdekaan yang menjadi simbol perjuangan
+      rakyat Bekasi.
+    </p>
+
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <a href="#" class="btn-lokasi">
+        <i class="fa-solid fa-location-dot"></i> Lihat Lokasi
+      </a>
+
+     <a href="booking_wisata.html" class="btn-booking">
+  <i class="fa-solid fa-ticket"></i> Pesan Tiket
+</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- INFO BAR -->
+<section class="detail-info">
+  <div class="info-item">
+    ⭐ <b id="ratingValue">9.3</b><br>
+    <span>(Rating Wisata)</span>
+  </div>
+
+  <div class="info-item">
+    👁 <b id="visitorCount">797</b><br>
+    <span>(Pengunjung Wisata)</span>
+  </div>
+
+  <div class="info-item">
+    ⏰ <b>08.00 – 17.00</b><br>
+    <span>(Waktu Kunjungan)</span>
+  </div>
+
+  <div class="info-item">
+    💰 <b>Gratis / Rp. 5.000</b><br>
+    <span>(Tiket Masuk)</span>
+  </div>
+</section>
+
+<!-- ULASAN -->
+<section class="review-section">
+
+ <div class="review-image">
+  <img src="static/img/museum1.jpg" alt="Gedung Juang 45 Tambun">
+</div>
+
+<div class="review-hero">
+  <h2>Apa Kata Mereka?</h2>
+  <p>Pengalaman pengunjung saat berkunjung ke Gedung Juang 45 Tambun</p>
+</div>
+
+  <div class="review-container" id="reviewContainer">
+
+    <div class="review-card">
+      <h4>Andi Saputra</h4>
+      <p>
+        Tempat bersejarah yang edukatif,
+        cocok untuk pelajar dan keluarga.
+      </p>
+      <div class="review-footer">
+        <span>📅 05.12.2025</span>
+        <span>⭐ 9.4</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <h4>Sari Wulandari</h4>
+      <p>
+        Bersih, terawat, dan penuh nilai sejarah.
+        Sangat direkomendasikan.
+      </p>
+      <div class="review-footer">
+        <span>📅 03.12.2025</span>
+        <span>⭐ 9.2</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pagination-dot">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+</section>
+
+<footer class="footer-sosmed">
+  <div class="sosmed-container">
+    <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+    <a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+    <a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
+    <a href="#"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+  </div>
+</footer>
+
+<!-- ICON KOMENTAR -->
+<div class="comment-float" onclick="openCommentForm()">💬</div>
+
+<!-- MODAL KOMENTAR -->
+<div class="comment-modal" id="commentModal">
+  <div class="comment-box">
+    <h3>Tambah Ulasan</h3>
+    <input type="text" id="name" placeholder="Nama">
+    <textarea id="comment" placeholder="Tulis ulasan..."></textarea>
+    <input type="number" id="rating" placeholder="Rating (1-10)" min="1" max="10">
+    <button onclick="addReview()">Kirim</button>
+  </div>
+</div>
+
+<script>
+function openCommentForm() {
+  document.getElementById("commentModal").style.display = "flex";
+}
+
+document.getElementById("commentModal").onclick = function(e) {
+  if (e.target === this) this.style.display = "none";
+};
+
+let visitorCount = 797;
+let wisataRating = 9.3;
+
+function addReview() {
+  const name = document.getElementById("name").value;
+  const comment = document.getElementById("comment").value;
+  const rating = parseFloat(document.getElementById("rating").value);
+
+  if (!name || !comment || !rating) {
+    alert("Lengkapi data!");
+    return;
+  }
+
+  const today = new Date().toLocaleDateString("id-ID");
+
+  document.getElementById("reviewContainer").insertAdjacentHTML(
+    "afterbegin",
+    `
+    <div class="review-card">
+      <h4>${name}</h4>
+      <p>${comment}</p>
+      <div class="review-footer">
+        <span>📅 ${today}</span>
+        <span>⭐ ${rating}</span>
+      </div>
+    </div>
+    `
+  );
+
+  wisataRating += rating / 10;
+  document.getElementById("ratingValue").innerText = wisataRating.toFixed(1);
+
+  visitorCount++;
+  document.getElementById("visitorCount").innerText = visitorCount;
+
+  document.getElementById("commentModal").style.display = "none";
+}
+</script>
+
+</body>
+</html>

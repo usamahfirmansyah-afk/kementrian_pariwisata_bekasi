@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Detail Event</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <nav>
+    <a href="Page_awal.html">Beranda</a>
+    <a href="event.html">Event</a>
+  </nav>
+</header>
+
+<section class="event-detail" style="padding:140px 80px; display:flex; gap:40px;">
+  
+  <!-- FOTO -->
+  <div>
+    <img id="eventImg" src="" style="width:420px; border-radius:16px;">
+  </div>
+
+  <!-- INFO -->
+  <div>
+    <h1 id="eventTitle"></h1>
+    <p><b>Tanggal:</b> <span id="eventDate"></span></p>
+    <p><b>Lokasi:</b> <span id="eventLocation"></span></p>
+    <p id="eventDesc"></p>
+
+    <br>
+    <a href="event.html" class="btn-event">← Kembali ke Event</a>
+  </div>
+
+</section>
+
+<script>
+const events = {
+  "kreatif-festival": {
+    title: "Kreatif Festival 2026",
+    date: "12 Januari 2026",
+    location: "Stadion Wibawa Mukti, Bekasi",
+    image: "static/img/kreatif.jpg",
+    desc: "Event tahunan yang menampilkan UMKM, seni budaya, dan kreativitas anak muda Kabupaten Bekasi."
+  },
+  "bekasi-tourism": {
+    title: "Bekasi Tourism Exhibition",
+    date: "20 Februari 2026",
+    location: "Gedung Juang, Bekasi",
+    image: "static/img/tourism.jpg",
+    desc: "Pameran pariwisata unggulan Kabupaten Bekasi."
+  },
+  "gowes-wisata": {
+    title: "GOWES WISATA",
+    date: "5 Maret 2026",
+    location: "Start Alun-Alun Bekasi",
+    image: "static/img/gowes.jpg",
+    desc: "Kegiatan bersepeda sambil menikmati destinasi wisata lokal."
+  }
+};
+
+// ambil ID dari URL
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+if (events[id]) {
+  document.getElementById("eventTitle").textContent = events[id].title;
+  document.getElementById("eventDate").textContent = events[id].date;
+  document.getElementById("eventLocation").textContent = events[id].location;
+  document.getElementById("eventDesc").textContent = events[id].desc;
+  document.getElementById("eventImg").src = events[id].image;
+} else {
+  document.body.innerHTML = "<h2 style='padding:100px'>Event tidak ditemukan</h2>";
+}
+</script>
+
+</body>
+</html>

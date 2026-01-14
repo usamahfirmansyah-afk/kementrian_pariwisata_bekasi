@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Gelar Waroeng Bekasi</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <img src="https://bangbadil.bekasikab.go.id/bangbadil/assets/img/logo_bekasi.png">
+    <span>Dinas Pariwisata<br><b>Kabupaten Bekasi</b></span>
+  </div>
+
+  <nav>
+    <a href="Page_awal.html">Beranda</a>
+    <a href="tentang_kami.html">Tentang Kami</a>
+    <div class="dropdown">
+      <a href="#" class="dropdown-toggle active">
+        Destinasi Wisata <i class="fa-solid fa-chevron-down"></i>
+      </a>
+      <div class="dropdown-menu">
+        <a href="wisata_kuliner.html" class="active">
+          Destinasi Wisata Kuliner
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="search">
+    <input type="text" placeholder="Search Destinasi...">
+  </div>
+</header>
+
+<!-- HERO DETAIL -->
+<section class="detail-hero" style="background-image: url('static/img/gelar_waroeng.jpg');">
+  <div class="detail-overlay">
+
+    <span class="badge-promo">🍽️ Kuliner Keluarga</span>
+
+    <h1>Gelar Waroeng Bekasi</h1>
+    <p>
+      Pusat kuliner keluarga dengan berbagai
+      pilihan makanan dan minuman.
+    </p>
+
+    <a href="#" class="btn-lokasi">
+      <i class="fa-solid fa-location-dot"></i> Lihat Lokasi
+    </a>
+
+  </div>
+</section>
+
+<!-- INFO BAR -->
+<section class="detail-info">
+  <div class="info-item">
+    ⭐ <b id="ratingValue">8.9</b><br>
+    <span>(Rating Wisata)</span>
+  </div>
+
+  <div class="info-item">
+    👁 <b id="visitorCount">44</b><br>
+    <span>(Pengunjung Wisata)</span>
+  </div>
+
+  <div class="info-item">
+    ⏰ <b>10.00 – 22.00</b><br>
+    <span>(Waktu Wisata)</span>
+  </div>
+
+  <div class="info-item">
+    💰 <b>Rp. 15.000 – Rp. 150.000</b><br>
+    <span>(Estimasi Fee Kuliner)</span>
+  </div>
+</section>
+
+<!-- ULASAN -->
+<section class="review-section">
+
+ <div class="review-image">
+  <img src="static/img/gelar_waroeng1.jpg" alt="Gelar Waroeng Bekasi">
+</div>
+
+<div class="review-hero">
+  <h2>Apa Kata Mereka?</h2>
+  <p>Apa ulasan dari mereka tentang tempat destinasi wisata ini!</p>
+</div>
+
+  <div class="review-container" id="reviewContainer">
+
+    <div class="review-card">
+      <h4>Dewi Lestari</h4>
+      <p>
+        Pilihan makanannya banyak dan cocok
+        untuk keluarga. Tempatnya luas dan nyaman.
+      </p>
+      <div class="review-footer">
+        <span>📅 06.12.2025</span>
+        <span>⭐ 9.0</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <h4>Ahmad Fauzan</h4>
+      <p>
+        Harga masih terjangkau, banyak tenant,
+        cocok buat makan rame-rame.
+      </p>
+      <div class="review-footer">
+        <span>📅 04.12.2025</span>
+        <span>⭐ 8.5</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pagination-dot">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+</section>
+
+<footer class="footer-sosmed">
+  <div class="sosmed-container">
+    <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+    <a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+    <a href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
+    <a href="#"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+  </div>
+</footer>
+
+<!-- ICON KOMENTAR -->
+<div class="comment-float" onclick="openCommentForm()">💬</div>
+
+<!-- MODAL KOMENTAR -->
+<div class="comment-modal" id="commentModal">
+  <div class="comment-box">
+    <h3>Tambah Ulasan</h3>
+
+    <input type="text" id="name" placeholder="Nama">
+    <textarea id="comment" placeholder="Tulis ulasan..."></textarea>
+    <input type="number" id="rating" placeholder="Rating (1-10)" min="1" max="10">
+
+    <button onclick="addReview()">Kirim</button>
+  </div>
+</div>
+
+<script>
+function openCommentForm() {
+  document.getElementById("commentModal").style.display = "flex";
+}
+
+document.getElementById("commentModal").onclick = function(e) {
+  if (e.target === this) this.style.display = "none";
+};
+
+let visitorCount = 44;
+let wisataRating = 8.9;
+
+function addReview() {
+  const name = document.getElementById("name").value;
+  const comment = document.getElementById("comment").value;
+  const rating = parseFloat(document.getElementById("rating").value);
+
+  if (!name || !comment || !rating) {
+    alert("Lengkapi data!");
+    return;
+  }
+
+  const today = new Date().toLocaleDateString("id-ID");
+
+  const reviewHTML = `
+    <div class="review-card">
+      <h4>${name}</h4>
+      <p>${comment}</p>
+      <div class="review-footer">
+        <span>📅 ${today}</span>
+        <span>⭐ ${rating}</span>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("reviewContainer")
+    .insertAdjacentHTML("afterbegin", reviewHTML);
+
+  wisataRating += rating / 10;
+  document.getElementById("ratingValue").innerText =
+    wisataRating.toFixed(1);
+
+  visitorCount++;
+  document.getElementById("visitorCount").innerText = visitorCount;
+
+  document.getElementById("name").value = "";
+  document.getElementById("comment").value = "";
+  document.getElementById("rating").value = "";
+
+  document.getElementById("commentModal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
