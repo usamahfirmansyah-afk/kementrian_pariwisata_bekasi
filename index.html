@@ -1,250 +1,625 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Dinas Pariwisata Kabupaten Bekasi</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!DOCTYPE html>
+  <html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <title>Dinas Pariwisata Kabupaten Bekasi</title>
 
-</head>
-
-
-<body>
-
-<header class="navbar">
-  <div class="logo">
-    <img src="https://bangbadil.bekasikab.go.id/bangbadil/assets/img/logo_bekasi.png" alt="Logo Bekasi">
-    <span>
-      Dinas Pariwisata<br>
-      <b>Kabupaten Bekasi</b>
-    </span>
-  </div>
-
-<nav>
-  <a href="index.html" class="active">Beranda</a>
-  <a href="tentang_kami.html">Tentang Kami</a>
-
-  <div class="dropdown">
-    <a href="#" class="dropdown-toggle">
-      Destinasi Wisata <i class="fa-solid fa-chevron-down"></i>
-    </a>
-
-    <div class="dropdown-menu">
-      <a href="wisata_kuliner.html">Destinasi Wisata Kuliner</a>
-      <a href="wisata_museum.html">Destinasi Wisata Museum</a>
-      <a href="#">Destinasi Wisata Desa</a>
-      <a href="#">Destinasi Wisata Rekreasi Air</a>
-      <a href="#">Destinasi Wisata Alam</a>
-      <a href="#">Destinasi Wisata Taman</a>
-      <a href="#">Destinasi Wisata Industri</a>
-    </div>
-  </div>
-
-  <!-- LOGIN & LOGOUT -->
-  <a href="loginpage.html" id="btnLogin">Login</a>
-  <a href="#" id="btnLogout" style="display:none;">Logout</a>
-</nav>
-
-
-
-  <div class="search">
-    <input type="text" placeholder="Search Destinasi...">
-  </div>
-</header>
-
-
-<section class="hero">
-  <div class="hero-content">
-    <h1>Hallo Sobat Wisata!</h1>
-    <p>Yuk Lihat Jadwal Event Kita Saat ini!</p>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-  <a href="event.html" class="btn-event">
-  Lihat Event
-  <span class="icon">📅</span>
-</a>
+    <style>
+      /* Style untuk Profile Menu */
+      .profile-menu {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .profile-toggle {
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #9370db 0%, #6a5acd 100%);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      
+      .profile-toggle:hover {
+        box-shadow: 0 5px 15px rgba(147, 112, 219, 0.4);
+        transform: translateY(-2px);
+      }
+      
+      .profile-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: white;
+        color: #6a5acd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 8px;
+      }
+      
+      .profile-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: white;
+        min-width: 200px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        z-index: 1000;
+        margin-top: 10px;
+        overflow: hidden;
+        transform: translateY(10px);
+        opacity: 0;
+        transition: all 0.3s;
+      }
+      
+      .profile-dropdown.show {
+        display: block;
+        transform: translateY(0);
+        opacity: 1;
+      }
+      
+      .dropdown-header {
+        padding: 15px 20px;
+        background: linear-gradient(135deg, #f8f9ff 0%, #eef1ff 100%);
+        border-bottom: 1px solid #eee;
+      }
+      
+      .dropdown-header .user-name {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+      }
+      
+      .dropdown-header .user-email {
+        font-size: 0.8rem;
+        color: #666;
+      }
+      
+      .dropdown-item {
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        color: #555;
+        text-decoration: none;
+        transition: all 0.2s;
+        border-bottom: 1px solid #f5f5f5;
+      }
+      
+      .dropdown-item:hover {
+        background-color: #f8f9ff;
+        color: #6a5acd;
+      }
+      
+      .dropdown-item i {
+        margin-right: 10px;
+        width: 20px;
+        text-align: center;
+      }
+      
+      .dropdown-divider {
+        height: 1px;
+        background-color: #eee;
+        margin: 5px 0;
+      }
+      
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: #ff4757;
+        color: white;
+        font-size: 0.7rem;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      /* Style untuk navbar */
+      .navbar nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      
+      .login-link {
+        background: linear-gradient(135deg, #9370db 0%, #6a5acd 100%);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s;
+      }
+      
+      .login-link:hover {
+        box-shadow: 0 5px 15px rgba(147, 112, 219, 0.4);
+        transform: translateY(-2px);
+      }
+      
 
+      
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .profile-toggle span {
+          display: none;
+        }
+        
+        .profile-avatar {
+          margin-right: 0;
+        }
+        
+        .search input {
+          width: 180px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+  <header class="navbar">
+    <div class="logo">
+      <img src="https://bangbadil.bekasikab.go.id/bangbadil/assets/img/logo_bekasi.png" alt="Logo Bekasi">
+      <span>
+        Dinas Pariwisata<br>
+        <b>Kabupaten Bekasi</b>
+      </span>
+    </div>
+
+    <nav>
+      <a href="index.html" class="active">Beranda</a>
+      <a href="tentang_kami.html">Tentang Kami</a>
+
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">
+          Destinasi Wisata <i class="fa-solid fa-chevron-down"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="wisata_museum.html">Destinasi Wisata Museum</a>
+          <a href="wisata_kuliner.html">Destinasi Wisata Kuliner</a>
+          <a href="wisata_desa.html">Destinasi Wisata Desa</a>
+          <a href="wisata_air.html">Destinasi Wisata Rekreasi Air</a>
+          <a href="wisata_alam.html">Destinasi Wisata Alam</a>
+          <a href="wisata_taman.html">Destinasi Wisata Taman</a>
+          <a href="wisata_industri.html">Destinasi Wisata Industri</a>
+        </div>
+      </div>
+
+     
+    </nav>
+
+    <div class="search">
+      <input type="text" placeholder="Search Destinasi...">
+    </div>
+
+     <!-- Profile Menu untuk pengguna yang sudah login -->
+      <div class="profile-menu" id="profileMenu" style="display: none;">
+        <button class="profile-toggle" id="profileToggle">
+          <div class="profile-avatar" id="userAvatar">U</div>
+          <span id="userName">Pengguna</span>
+          <div class="notification-badge" id="notificationBadge" style="display: none;">3</div>
+        </button>
+        
+        <div class="profile-dropdown" id="profileDropdown">
+          <div class="dropdown-header">
+            <div class="user-name" id="dropdownUserName">Nama Pengguna</div>
+            <div class="user-email" id="dropdownUserEmail">email@contoh.com</div>
+          </div>
+          
+          <a href="#" class="dropdown-item openModal" data-type="profil">
+    <i class="fas fa-user"></i> Profil Saya
+  </a>
+
+  <a href="#" class="dropdown-item openModal" data-type="pengaturan">
+    <i class="fas fa-cog"></i> Pengaturan
+  </a>
+
+  <a href="#" class="dropdown-item openModal" data-type="notifikasi">
+    <i class="fas fa-bell"></i> Notifikasi
+  </a>
+
+          
+          <div class="dropdown-divider"></div>
+          
+          <a href="#" class="dropdown-item" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> Keluar
+          </a>
+        </div>
+
+<!-- MODAL POPUP -->
+<div class="modal" id="popupModal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeModal">&times;</span>
+    <h3 id="modalTitle"></h3>
+
+    <form id="modalForm">
+      <!-- ISI DINAMIS -->
+      <div id="modalBody"></div>
+
+      <button type="submit" class="btn-save" id="saveBtn">Simpan</button>
+    </form>
   </div>
-</section>
+</div>
 
-<!-- Top 3 Destinasi -->
-<section class="top-destinasi">
-  <h2>Top 3 Destinasi Wisata Terfavorit</h2>
-  <p class="subtitle">Top Tiga Tempat Destinasi Wisata Terfavorit</p>
 
-  <div class="card-container">
-    <div class="card">
-      <img src="img-placeholder.jpg" alt="">
-      <h3>Gedung Juang 45 Tambun</h3>
-      <p>Destinasi wisata Museum yang menunjukkan tentang sejarah...</p>
-      <span class="rating">⭐ 797</span>
-      <button>Lihat Tempat Destinasi</button>
+      </div>
+
+      <!-- Link login untuk pengguna yang belum login -->
+      <a href="loginpage.html" class="login-link" id="loginLink">Login</a>
+  </header>
+
+  <!-- Sisanya sama seperti sebelumnya -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 id="greeting">Halo Sobat Wisata!</h1>
+      <p>Yuk Lihat Jadwal Event Kita Saat ini!</p>
+      <a href="event.html" class="btn-event">
+        Lihat Event <span class="icon">📅</span>
+      </a>
     </div>
+  </section>
 
-    <div class="card">
-      <img src="img-placeholder.jpg" alt="">
-      <h3>Taman Pesona Wanajaya</h3>
-      <p>Memiliki sirkuit motocross dan trek sepeda (pump track)...</p>
-      <span class="rating">⭐ 590</span>
-      <button>Lihat Tempat Destinasi</button>
+  <!-- Top 3 Destinasi -->
+  <section class="top-destinasi">
+    <h2>Top 3 Destinasi Wisata Terfavorit</h2>
+    <p class="subtitle">Top Tiga Tempat Destinasi Wisata Terfavorit</p>
+
+    <div class="card-container">
+      <div class="card">
+        <img src="static/img/museum1.jpg" alt="">
+        <h3>Gedung Juang 45 Tambun</h3>
+        <p>Destinasi wisata Museum yang menunjukkan tentang sejarah...</p>
+        <span class="rating">⭐ 797</span>
+        
+         <a href="detail_gedung_juang.html">
+        <button>Lihat Tempat Destinasi</button>
+      </a>
+      </div>
+
+      <div class="card">
+        <img src="https://media.indozone.id/crop/400x0/smart/photo/p2/95/2025/01/16/taman-kota-bekasi-194085822.jpg" alt="">
+        <h3>Taman Pesona Wanajaya</h3>
+        <p>Memiliki sirkuit motocross dan trek sepeda (pump track)...</p>
+        <span class="rating">⭐ 590</span>
+         <a href="wisata_taman.html">
+        <button>Lihat Tempat Destinasi</button>
+      </a>
+      </div>
+
+      <div class="card">
+        <img src="https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/132/2024/02/15/Kampoeng-Djamoe-OrganikJPG-1528623978.jpg" alt="">
+        <h3>Kampoeng Djamoee Organik</h3>
+        <p>Taman luas yang menanam ratusan jenis tanaman obat...</p>
+        <span class="rating">⭐ 307</span>
+         <a href="wisata_alam.html">
+        <button>Lihat Tempat Destinasi</button>
+      </a>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <img src="img-placeholder.jpg" alt="">
-      <h3>Kampoeng Djamoee Organik</h3>
-      <p>Taman luas yang menanam ratusan jenis tanaman obat...</p>
-      <span class="rating">⭐ 307</span>
-      <button>Lihat Tempat Destinasi</button>
+  <!-- Macam-Macam Destinasi -->
+  <section class="kategori">
+    <h2>Macam-Macam Destinasi Wisata</h2>
+
+    <div class="kategori-container">
+      <div class="kategori-card">
+        <div class="fas fa-kitchen-set"></div>
+
+        <h4>Wisata Kuliner</h4>
+        <p>Macam-macam tempat wisata Kuliner di Kab. Bekasi</p>
+        <a href="wisata_kuliner.html">
+        <button>Lihat Tempat Destinasi</button>
+      </a>
+      </div>
+
+      <div class="kategori-card">
+        <div class="fas fa-building-columns"></div>
+        <h4>Wisata Museum</h4>
+        <p>Macam-macam tempat wisata Museum di Kab. Bekasi</p>
+        <a href="wisata_museum.html">
+        <button>Lihat Tempat Destinasi</button>
+      </a>
+      </div>
+
+      <div class="kategori-card">
+        <div class="fas fa-industry"></div>
+        <h4>Wisata Industri</h4>
+        <p>Macam-macam tempat wisata Industri di Kab. Bekasi</p>
+        <a href="wisata_industri.html">
+        <button>Lihat Tempat Destinasi</button>
+      </a>
+      </div>
+
+      <div class="kategori-card">
+        <div class="fas fa-house-chimney"></div>
+        <h4>Wisata Desa</h4>
+        <p>Macam-macam tempat wisata Desa di Kab. Bekasi</p>
+        <a href="wisata_desa.html">
+        <button>Lihat Tempat Destinasi</button>
+      </a>
+      </div>
+
+      <div class="kategori-card">
+        <div class="fas fa-water"></div>
+        <h4>Wisata Rekreasi Air</h4>
+        <p>Macam-macam tempat wisata Rekreasi Air di Kab. Bekasi</p>
+        <a href="wisata_air.html">
+        <button>Lihat Tempat Destinasi</button>
+      </a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Macam-Macam Destinasi -->
-<section class="kategori">
-  <h2>Macam-Macam Destinasi Wisata</h2>
+  <!-- PROMO DESTINASI -->
+  <section class="promo">
+    <h2>Promo Destinasi Wisata</h2>
+    <p class="subtitle">Macam-macam promo destinasi wisata</p>
 
-  <div class="kategori-container">
-    <div class="kategori-card">
-      <div class="icon"></div>
-      <h4>Wisata Kuliner</h4>
-      <p>Macam-macam tempat wisata Kuliner di Kab. Bekasi</p>
-      <button>Lihat Destinasi</button>
+    <div class="promo-container">
+      <div class="promo-card">
+        <img src="img-placeholder.jpg" alt="">
+        <h4>Taman Pesona Wanajaya</h4>
+        <p>Memiliki sirkuit motocross dan trek sepeda (pump track)...</p>
+        <span class="badge">🎟 Promo Tiket</span>
+        <button>Lihat Tempat Destinasi</button>
+      </div>
+
+      <div class="promo-card">
+        <img src="img-placeholder.jpg" alt="">
+        <h4>Amanai Grand Kota Bintang</h4>
+        <p>Resto Amanai memiliki konsep alam dengan danau yang cocok...</p>
+        <span class="badge">🍽 Promo Makanan</span>
+        <button>Lihat Tempat Destinasi</button>
+      </div>
+
+      <div class="promo-card">
+        <img src="img-placeholder.jpg" alt="">
+        <h4>Kampoeng Djamoee Organik</h4>
+        <p>Taman luas yang menanam ratusan jenis tanaman obat...</p>
+        <span class="badge">🏨 Promo Booking</span>
+        <button>Lihat Tempat Destinasi</button>
+      </div>
     </div>
+  </section>
 
-    <div class="kategori-card">
-      <div class="icon"></div>
-      <h4>Wisata Museum</h4>
-      <p>Macam-macam tempat wisata Museum di Kab. Bekasi</p>
-      <button>Lihat Destinasi</button>
-    </div>
-
-    <div class="kategori-card">
-      <div class="icon"></div>
-      <h4>Wisata Industri</h4>
-      <p>Macam-macam tempat wisata Industri di Kab. Bekasi</p>
-      <button>Lihat Destinasi</button>
-    </div>
-
-    <div class="kategori-card">
-      <div class="icon"></div>
-      <h4>Wisata Desa</h4>
-      <p>Macam-macam tempat wisata Desa di Kab. Bekasi</p>
-      <button>Lihat Destinasi</button>
-    </div>
-
-    <div class="kategori-card">
-      <div class="icon"></div>
-      <h4>Wisata Rekreasi Air</h4>
-      <p>Macam-macam tempat wisata Rekreasi Air di Kab. Bekasi</p>
-      <button>Lihat Destinasi</button>
-    </div>
-  </div>
-</section>
-
-<!-- PROMO DESTINASI -->
-<section class="promo">
-  <h2>Promo Destinasi Wisata</h2>
-  <p class="subtitle">Macam-macam promo destinasi wisata</p>
-
-  <div class="promo-container">
-    <div class="promo-card">
-      <img src="img-placeholder.jpg" alt="">
-      <h4>Taman Pesona Wanajaya</h4>
-      <p>Memiliki sirkuit motocross dan trek sepeda (pump track)...</p>
-      <span class="badge">🎟 Promo Tiket</span>
-      <button>Lihat Tempat Destinasi</button>
-    </div>
-
-    <div class="promo-card">
-      <img src="img-placeholder.jpg" alt="">
-      <h4>Amanai Grand Kota Bintang</h4>
-      <p>Resto Amanai memiliki konsep alam dengan danau yang cocok...</p>
-      <span class="badge">🍽 Promo Makanan</span>
-      <button>Lihat Tempat Destinasi</button>
-    </div>
-
-    <div class="promo-card">
-      <img src="img-placeholder.jpg" alt="">
-      <h4>Kampoeng Djamoee Organik</h4>
-      <p>Taman luas yang menanam ratusan jenis tanaman obat...</p>
-      <span class="badge">🏨 Promo Booking</span>
-      <button>Lihat Tempat Destinasi</button>
-    </div>
-  </div>
-</section>
-
-<!-- BERITA TERKINI -->
+  <!-- BERITA TERKINI -->
+ <!-- BERITA TERKINI -->
 <section class="berita">
   <h2>Berita Terkini</h2>
   <p class="subtitle">Seputar Berita Terkini di Kabupaten Bekasi</p>
 
   <div class="berita-container">
+
+    <!-- BERITA 1 -->
     <div class="berita-card">
-      <img src="img-placeholder.jpg" alt="">
-      <h4>Tiga Anak di Bekasi Tewas...</h4>
-      <p>Penyebab para korban tenggelam diduga karena arus kali yang...</p>
+      <img src="https://asset.tribunnews.com/v5_scO2XHY8oBX6gbQlqRMr8uU4=/1200x675/filters:upscale():quality(30):format(webp):focal(0.5x0.5:0.5x0.5)/jabar/foto/bank/originals/Remaja-tenggelam-di-Danau-Lambang-Sari-Bekasi.jpg" alt="Berita Bekasi">
+      <h4>Tiga Anak di Bekasi Tewas Tenggelam</h4>
+      <p>Penyebab para korban tenggelam diduga karena arus kali yang deras akibat hujan...</p>
       <span class="tanggal">📅 01.12.2025</span>
-      <button>Lihat Selengkapnya</button>
+      <a href="detail_berita.html?id=1" class="btn-detail">Lihat Selengkapnya</a>
     </div>
 
+    <!-- BERITA 2 -->
     <div class="berita-card">
-      <img src="img-placeholder.jpg" alt="">
-      <h4>Cuaca Awal Desember...</h4>
-      <p>Data waspada hujan sedang hingga sangat lebat di awal...</p>
+      <img src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/720x0/webp/photo/2025/03/11/2112200343.jpg" alt="Berita Bekasi">
+      <h4>Cuaca Ekstrem Awal Desember</h4>
+      <p>BMKG mengimbau masyarakat untuk waspada hujan sedang hingga sangat lebat...</p>
       <span class="tanggal">📅 01.12.2025</span>
-      <button>Lihat Selengkapnya</button>
+      <a href="detail_berita.html?id=2" class="btn-detail">Lihat Selengkapnya</a>
     </div>
 
+    <!-- BERITA 3 -->
     <div class="berita-card">
-      <img src="img-placeholder.jpg" alt="">
-      <h4>Warga Bekasi Tewas...</h4>
-      <p>Seorang warga Bekasi, Jawa Barat, tewas akibat tersambar petir...</p>
+      <img src="https://alexanews.id/wp-content/uploads/2025/12/IMG-20251221-WA0135.jpg" alt="Berita Bekasi">
+      <h4>Warga Bekasi Tewas Tersambar Petir</h4>
+      <p>Seorang warga Bekasi meninggal dunia akibat tersambar petir saat hujan deras...</p>
       <span class="tanggal">📅 20.11.2025</span>
-      <button>Lihat Selengkapnya</button>
+      <a href="detail_berita.html?id=3" class="btn-detail">Lihat Selengkapnya</a>
     </div>
+
   </div>
 </section>
 
-<footer class="footer-sosmed">
-  <div class="sosmed-container">
-    <a href="#" class="sosmed-item">
-      <i class="fa-brands fa-instagram"></i>
-      <span>Instagram</span>
-    </a>
+  <footer class="footer-sosmed">
+    <div class="sosmed-container">
+      <a href="#" class="sosmed-item">
+        <i class="fa-brands fa-instagram"></i>
+        <span>Instagram</span>
+      </a>
+      <a href="#" class="sosmed-item">
+        <i class="fa-brands fa-facebook-f"></i>
+        <span>Facebook</span>
+      </a>
+      <a href="#" class="sosmed-item">
+        <i class="fa-brands fa-youtube"></i>
+        <span>You Tube</span>
+      </a>
+      <a href="#" class="sosmed-item">
+        <i class="fa-brands fa-tiktok"></i>
+        <span>Tik Tok</span>
+      </a>
+    </div>
+  </footer>
 
-    <a href="#" class="sosmed-item">
-      <i class="fa-brands fa-facebook-f"></i>
-      <span>Facebook</span>
-    </a>
+  <script>
+    // Cek status login dari localStorage
+   function checkLoginStatus() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const profileMenu = document.getElementById('profileMenu');
+    const loginLink = document.getElementById('loginLink');
+    const greeting = document.getElementById('greeting');
 
-    <a href="#" class="sosmed-item">
-      <i class="fa-brands fa-youtube"></i>
-      <span>You Tube</span>
-    </a>
+    // Jika belum login
+    if (!userData || !userData.isLoggedIn) {
+      profileMenu.style.display = 'none';
+      loginLink.style.display = 'inline-block';
+      greeting.textContent = 'Halo Sobat Wisata!';
+      return;
+    }
 
-    <a href="#" class="sosmed-item">
-      <i class="fa-brands fa-tiktok"></i>
-      <span>Tik Tok</span>
-    </a>
-  </div>
-</footer>
+    // ===== USER LOGIN =====
+    profileMenu.style.display = 'inline-block';
+    loginLink.style.display = 'none';
 
-</body>
-<script>
-const btnLogin = document.getElementById('btnLogin');
-const btnLogout = document.getElementById('btnLogout');
+    const userName = userData.username || 'Pengguna';
 
-const isLogin = localStorage.getItem('isLogin');
+    // Avatar
+    document.getElementById('userAvatar').textContent =
+      userName.charAt(0).toUpperCase();
 
-if (isLogin === 'true') {
-    btnLogin.style.display = 'none';
-    btnLogout.style.display = 'inline-block';
-}
+    // Nama
+    document.getElementById('userName').textContent = userName;
+    document.getElementById('dropdownUserName').textContent = userName;
 
-btnLogout.addEventListener('click', () => {
-    localStorage.clear();
-    window.location.href = 'loginpage.html';
+    // Email
+    document.getElementById('dropdownUserEmail').textContent =
+      userData.email || (userData.isGuest ? 'Pengguna tamu' : '-');
+
+    // Greeting
+    greeting.textContent = userData.isGuest
+      ? 'Halo Tamu! Selamat Datang'
+      : `Halo ${userName}! Selamat Datang`;
+
+    // Notifikasi (hanya user login)
+    document.getElementById('notificationBadge').style.display =
+      userData.isGuest ? 'none' : 'flex';
+  }
+
+    // Toggle profile dropdown
+    document.getElementById('profileToggle').addEventListener('click', function(e) {
+      e.stopPropagation();
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('show');
+    });
+    
+    // Tutup dropdown ketika klik di luar
+    document.addEventListener('click', function() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.remove('show');
+    });
+    
+    // Mencegah dropdown tertutup saat klik di dalam dropdown
+    document.getElementById('profileDropdown').addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+    
+    // Logout function
+    document.getElementById('logoutBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Konfirmasi logout
+      if (confirm('Apakah Anda yakin ingin keluar?')) {
+        // Hapus data login dari localStorage
+        localStorage.removeItem('userData');
+        
+        // Tampilkan pesan logout berhasil
+        alert('Anda telah berhasil logout.');
+        
+        // Redirect ke halaman login
+        window.location.href = 'loginpage.html';
+      }
+    });
+    
+    // Cek status login saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+
+
+const modal = document.getElementById("popupModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalBody = document.getElementById("modalBody");
+const closeModal = document.getElementById("closeModal");
+const saveBtn = document.getElementById("saveBtn");
+
+document.querySelectorAll(".openModal").forEach(item => {
+  item.addEventListener("click", function(e) {
+    e.preventDefault();
+    const type = this.dataset.type;
+
+    modalBody.innerHTML = ""; // reset
+
+    if (type === "profil") {
+      modalTitle.innerText = "Edit Profil";
+      saveBtn.style.display = "block";
+
+      modalBody.innerHTML = `
+        <div class="form-group">
+          <label>Nama</label>
+          <input type="text" placeholder="Nama Lengkap" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="Password Baru">
+        </div>
+        <div class="form-group">
+          <label>No. Telp</label>
+          <input type="tel" placeholder="08xxxxxxxx">
+        </div>
+      `;
+    }
+
+    else if (type === "pengaturan") {
+      modalTitle.innerText = "Pengaturan Bahasa";
+      saveBtn.style.display = "block";
+
+      modalBody.innerHTML = `
+        <div class="form-group">
+          <label>Pilih Bahasa</label>
+          <select>
+            <option value="id">Bahasa Indonesia</option>
+            <option value="en">English</option>
+            <option value="jp">日本語</option>
+          </select>
+        </div>
+      `;
+    }
+
+    else if (type === "notifikasi") {
+      modalTitle.innerText = "Notifikasi";
+      saveBtn.style.display = "none";
+
+      modalBody.innerHTML = `
+        <div class="notification-box">🔔 Anda memiliki 3 notifikasi baru</div>
+        <div class="notification-box">📢 Promo wisata terbaru tersedia</div>
+        <div class="notification-box">✅ Profil berhasil diperbarui</div>
+      `;
+    }
+
+    modal.style.display = "block";
+  });
 });
-</script>
 
+closeModal.onclick = () => modal.style.display = "none";
 
-</html>
+window.onclick = e => {
+  if (e.target === modal) modal.style.display = "none";
+};
+
+// Submit form
+document.getElementById("modalForm").addEventListener("submit", e => {
+  e.preventDefault();
+  alert("Data berhasil disimpan!");
+  modal.style.display = "none";
+});
+
+  </script>
+
+  </body>
+  </html>

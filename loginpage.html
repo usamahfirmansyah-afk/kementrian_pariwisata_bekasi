@@ -635,6 +635,11 @@
     </div>
 
     <script>
+        localStorage.removeItem('isLogin');
+localStorage.removeItem('isLoggedIn');
+localStorage.removeItem('username');
+localStorage.removeItem('isGuest');
+
         // Form submission handler
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -687,10 +692,15 @@
             
             // Simulasi permintaan server dengan timeout
             setTimeout(() => {
-                // Simpan data login di localStorage
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('username', username);
-                localStorage.setItem('loginTime', new Date().toISOString());
+              const userData = {
+    isLoggedIn: true,
+    username: getDisplayName(username),
+    email: username.includes('@') ? username : '',
+    isGuest: false
+};
+
+localStorage.setItem('userData', JSON.stringify(userData));
+
                 
                 // Tampilkan pesan sukses
                 showNotification(`Login berhasil! Selamat datang, ${getDisplayName(username)}`, '#9370db');
@@ -785,9 +795,13 @@
             // Event listener untuk tombol konfirmasi - TAMBAHKAN REDIRECT
             modal.querySelector('#confirmGuest').addEventListener('click', function() {
                 // Simpan status guest
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('username', 'Guest');
-                localStorage.setItem('isGuest', 'true');
+                localStorage.setItem('userData', JSON.stringify({
+    isLoggedIn: true,
+    username: 'Guest',
+    email: '',
+    isGuest: true
+}));
+
                 
                 modal.style.opacity = '0';
                 modal.querySelector('div').style.transform = 'translateY(20px)';
@@ -797,7 +811,8 @@
                     
                     // Redirect setelah 1.5 detik
                     setTimeout(() => {
-                        window.location.href = 'Page_awal.html';
+                        window.location.href = 'index.html';
+
                     }, 1500);
                 }, 300);
             });
@@ -927,45 +942,7 @@
             }
         });
 
-/* ================= LOGIN USER ================= */
-document.getElementById('loginForm').addEventListener('submit', function (e) {
-    e.preventDefault();
 
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value;
-
-    if (!username || !password) {
-        showNotification('Email & password wajib diisi', '#ff4757');
-        return;
-    }
-
-    // SIMULASI LOGIN BERHASIL
-    localStorage.setItem('isLogin', 'true');
-    localStorage.setItem('username', username);
-    localStorage.removeItem('isGuest');
-
-    showNotification(`Login berhasil! Selamat datang ${username}`, '#9370db');
-
-    setTimeout(() => {
-        window.location.href = 'index.html';
-    }, 1200);
-});
-
-
-/* ================= LOGIN GUEST ================= */
-document.getElementById('guestButton').addEventListener('click', function () {
-    if (!confirm('Masuk sebagai tamu? Beberapa fitur akan dibatasi')) return;
-
-    localStorage.setItem('isLogin', 'true');
-    localStorage.setItem('username', 'Guest');
-    localStorage.setItem('isGuest', 'true');
-
-    showNotification('Masuk sebagai Guest', '#9370db');
-
-    setTimeout(() => {
-        window.location.href = 'index.html';
-    }, 1200);
-});
 
 
 /* ================= NOTIFIKASI ================= */

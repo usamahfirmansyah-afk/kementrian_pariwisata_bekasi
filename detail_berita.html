@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Detail Berita</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      padding: 20px;
+    }
+
+    .berita-detail {
+      max-width: 800px;
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      margin: auto;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .berita-detail img {
+      width: 100%;
+      border-radius: 12px;
+      margin: 15px 0;
+      object-fit: cover;
+      max-height: 400px;
+    }
+
+    .tanggal {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="berita-detail">
+  <h2 id="judul"></h2>
+  <span class="tanggal" id="tanggal"></span>
+
+  <img id="gambarBerita" src="" alt="Gambar Berita">
+
+  <p id="isi"></p>
+
+  <a href="index.html" class="back-btn">← Kembali ke Berita</a>
+</div>
+
+<script>
+const dataBerita = {
+  1: {
+    judul: "Tiga Anak di Bekasi Tewas Tenggelam",
+    tanggal: "01 Desember 2025",
+    gambar: "https://asset.tribunnews.com/v5_scO2XHY8oBX6gbQlqRMr8uU4=/1200x675/filters:upscale():quality(30):format(webp):focal(0.5x0.5:0.5x0.5)/jabar/foto/bank/originals/Remaja-tenggelam-di-Danau-Lambang-Sari-Bekasi.jpg",
+    isi: "Tiga anak di Kabupaten Bekasi dilaporkan meninggal dunia akibat tenggelam di aliran sungai. Peristiwa ini terjadi saat korban bermain di sekitar bantaran sungai. Arus yang deras akibat hujan menjadi penyebab utama kejadian tersebut. Pihak berwenang mengimbau orang tua untuk lebih mengawasi anak-anak."
+  },
+  2: {
+    judul: "Cuaca Ekstrem Awal Desember di Bekasi",
+    tanggal: "01 Desember 2025",
+    gambar: "https://assets.pikiran-rakyat.com/crop/0x0:0x0/720x0/webp/photo/2025/03/11/2112200343.jpg",
+    isi: "BMKG mengeluarkan peringatan dini cuaca ekstrem di wilayah Kabupaten Bekasi. Masyarakat diimbau waspada terhadap hujan lebat, angin kencang, dan potensi banjir di beberapa kecamatan. Pemerintah daerah juga menyiagakan tim tanggap darurat."
+  },
+  3: {
+    judul: "Warga Bekasi Tewas Tersambar Petir",
+    tanggal: "20 November 2025",
+    gambar: "https://alexanews.id/wp-content/uploads/2025/12/IMG-20251221-WA0135.jpg",
+    isi: "Seorang warga Kabupaten Bekasi meninggal dunia akibat tersambar petir saat hujan deras melanda wilayah tersebut. Kejadian ini menjadi pengingat pentingnya keselamatan saat cuaca buruk, terutama menghindari area terbuka ketika terjadi badai."
+  }
+};
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+if (dataBerita[id]) {
+  document.getElementById("judul").innerText = dataBerita[id].judul;
+  document.getElementById("tanggal").innerText = "📅 " + dataBerita[id].tanggal;
+  document.getElementById("isi").innerText = dataBerita[id].isi;
+  document.getElementById("gambarBerita").src = dataBerita[id].gambar;
+} else {
+  document.querySelector(".berita-detail").innerHTML = "<h2>Berita tidak ditemukan</h2>";
+}
+</script>
+
+</body>
+</html>
